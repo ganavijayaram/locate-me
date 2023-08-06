@@ -5,12 +5,13 @@ import { Company } from "./Company";
 // that if they wan tit be added ot the addMarker method, then they need to ahve all the properties which
 // are listed in the interface
 
-interface Mappable {
+export interface Mappable {
   location : {
     lat: number,
     lng: number
   }
   markerContent(): string
+  color: string
 }
 
 //creating instance of map
