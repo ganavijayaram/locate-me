@@ -1,4 +1,7 @@
-  //creating instance of map
+import { User } from "./User";
+import { Company } from "./Company";
+
+//creating instance of map
 // now if some developer comes, he will have access to index file, so he might call any methods on the map variable
 // and this might break the program
 // so we will be using a separate class wheere will wrap methods and variables which caan be called on this maps object
@@ -7,9 +10,9 @@ export class CustomMap {
   // no one to access the map object outside the class
   private googleMap: google.maps.Map
 
-  constructor() {
+  constructor(divId: string) {
 
-    const mapElement = document.getElementById('map');
+    const mapElement = document.getElementById(divId);
       if (mapElement) {
         this.googleMap = new google.maps.Map(mapElement, {
           zoom: 1,
@@ -21,7 +24,27 @@ export class CustomMap {
       } else {
         // Handle the case where 'mapElement' is null
       }
-
-
   }
+
+  addUserMarker(user: User): void {
+    new google.maps.Marker({
+      map: this.googleMap,
+      position: {
+        lat: user.location.lat,
+        lng: user.location.lng
+      }
+    })
+  }
+
+  addCompanyMarker(company: Company): void {
+    new google.maps.Marker({
+      map: this.googleMap,
+      position: {
+        lat: company.location.lat,
+        lng: company.location.lng
+      }
+    })
+  }
+
 }
+
