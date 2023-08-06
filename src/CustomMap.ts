@@ -10,6 +10,7 @@ interface Mappable {
     lat: number,
     lng: number
   }
+  markerContent(): string
 }
 
 //creating instance of map
@@ -40,13 +41,24 @@ export class CustomMap {
   //| will let you characters which are common to both
   // since only location is common we will be able to use only location
   addMarker(mappable: Mappable): void {
-    new google.maps.Marker({
+    const marker = new google.maps.Marker({
       map: this.googleMap,
       position: {
         lat: mappable.location.lat,
         lng: mappable.location.lng
       }
     })
+
+    marker.addListener('click', ()=> {
+      const infoWindow = new google.maps.InfoWindow({
+        content: mappable.markerContent()
+      })
+      infoWindow.open(this.googleMap, marker)
+    })
+
+    
   }
+
+  
 }
 

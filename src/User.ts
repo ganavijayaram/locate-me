@@ -6,6 +6,7 @@ export class User  {
     lat: number
     lng: number
   }
+  
 
   constructor() {
     this.name = faker.person.firstName()
@@ -16,7 +17,9 @@ export class User  {
       lat: (faker.location.latitude()),
       lng: (faker.location.longitude())
     }
-
+  }
+  markerContent(): string {
+      return `User Name: ${this.name}`
   }
 }
 
