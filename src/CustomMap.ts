@@ -1,7 +1,16 @@
 import { User } from "./User";
 import { Company } from "./Company";
 
+//instead of importing and adding to the add Marker, we are instructung the classes
+// that if they wan tit be added ot the addMarker method, then they need to ahve all the properties which
+// are listed in the interface
 
+interface Mappable {
+  location : {
+    lat: number,
+    lng: number
+  }
+}
 
 //creating instance of map
 // now if some developer comes, he will have access to index file, so he might call any methods on the map variable
@@ -30,7 +39,7 @@ export class CustomMap {
 
   //| will let you characters which are common to both
   // since only location is common we will be able to use only location
-  addMarker(mappable: User | Company): void {
+  addMarker(mappable: Mappable): void {
     new google.maps.Marker({
       map: this.googleMap,
       position: {
@@ -39,16 +48,5 @@ export class CustomMap {
       }
     })
   }
-/*
-  addCompanyMarker(company: Company): void {
-    new google.maps.Marker({
-      map: this.googleMap,
-      position: {
-        lat: company.location.lat,
-        lng: company.location.lng
-      }
-    })
-  }
-*/
 }
 
